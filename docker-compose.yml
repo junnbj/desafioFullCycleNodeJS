@@ -8,6 +8,7 @@ services:
       - "3000:3000"
     depends_on:
       - mysql
+    command: dockerize -wait tcp://mysql:3306 -timeout 30s npm start
 
   mysql:
     image: mysql:5.7
@@ -17,6 +18,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./mysql_data:/var/lib/mysql
     restart: always
 
   nginx:
