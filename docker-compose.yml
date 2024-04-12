@@ -6,6 +6,8 @@ services:
       context: ./app
     ports:
       - "3000:3000"
+    volumes:
+      - ./app:/app      
     depends_on:
       - mysql
     command: dockerize -wait tcp://mysql:3306 -timeout 30s npm start
